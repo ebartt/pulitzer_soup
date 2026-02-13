@@ -26,7 +26,7 @@ def get_data():
 
     r = requests.get(root_url, headers=headers)
     content = r.content
-    soup = BeautifulSoup(content)
+    soup = BeautifulSoup(content, 'html.parser')
 
     #navigating to the table with winners from 1980 to present
     listtables = soup.find_all('table')
@@ -62,7 +62,7 @@ def get_data():
 
         if title_href is not None:
                 book_page = requests.get(base_url + title_href, headers=headers)
-                book_soup = BeautifulSoup(book_page.content)
+                book_soup = BeautifulSoup(book_page.content, 'html.parser')
                 
                 infobox = book_soup.find('table', attrs = {'class': "infobox ib-book vcard"})
                 if infobox is not None:
